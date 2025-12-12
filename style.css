@@ -53,3 +53,80 @@ h1 {
   letter-spacing: 5px;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
+
+.light {
+  display: inline-block;
+  font-size: 25px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.light:hover {
+  transform: scale(1.3);
+}
+
+/* definição das opções dasluzes  */
+.light.red {
+  color: #ff0000;
+  text-shadow: 0 0 10px #ff0000;
+}
+.light.blue {
+  color: #00a0ff;
+  text-shadow: 0 0 10px #00a0ff;
+}
+.light.yellow {
+  color: #ffff00;
+  text-shadow: 0 0 10px #ffff00;
+}
+.light.green {
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
+}
+.light.purple {
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff;
+}
+.light.white {
+  color: #ffffff;
+  text-shadow: 0 0 10px #ffffff;
+}
+
+.light.off {
+  opacity: 0.2;
+  text-shadow: none;
+}
+
+.trunk {
+  font-size: 30px;
+  color: #8b4513;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.controls {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+button:active {
+  transform: translateY(0);
+}
