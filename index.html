@@ -11,11 +11,12 @@
       <h1>🎄 Árvore de Natal Interativa 🎄</h1>
       <div class="tree">
         <div class="star">★</div>
-        <div class="tree-line">▲</div>
+        <div class="tree-line" data-level="0">▲</div>
         <div class="tree-line">
-          <span class="light" data-color="red" data-level="1"></span>●</span>▲<span
+          <span class="light" data-color="blue" data-level="1">●</span>▲<span
             class="light"
-            data-color="blue" data-level="1"
+            data-color="blue"
+            data-level="1"
             >●</span
           >
         </div>
@@ -28,12 +29,8 @@
           >
         </div>
         <div class="tree-line">
-          <span class="light" data-color="purple" data-level="3">●</span>▲▲▲<span
-            class="light"
-            data-color="white"
-            data-level="3"
-            >●</span
-          >
+          <span class="light" data-color="purple" data-level="3">●</span
+          >▲▲▲<span class="light" data-color="white" data-level="3">●</span>
         </div>
         <div class="tree-line">
           <span class="light" data-color="blue" data-level="4">●</span>▲▲▲▲<span
@@ -44,20 +41,12 @@
           >
         </div>
         <div class="tree-line">
-          <span class="light" data-color="green" data-level="5">●</span>▲▲▲▲▲<span
-            class="light"
-            data-color="yellow"
-            data-level="5"
-            >●</span
-          >
+          <span class="light" data-color="green" data-level="5">●</span
+          >▲▲▲▲▲<span class="light" data-color="yellow" data-level="5">●</span>
         </div>
         <div class="tree-line">
-          <span class="light" data-color="white" data-level="5">●</span>▲▲▲▲▲▲<span
-            class="light"
-            data-color="purple"
-            data-level="6"
-            >●</span
-          >
+          <span class="light" data-color="white" data-level="5">●</span
+          >▲▲▲▲▲▲<span class="light" data-color="purple" data-level="6">●</span>
         </div>
         <div class="trunk">|||</div>
       </div>
@@ -72,8 +61,10 @@
   </body>
   <script>
     const lights = document.querySelectorAll(".light");
-    let interval = [];
+    let intervals = [];
     let lightOn = false;
+    let snowInterval = null;
+    let currentPattern = "";
     // Função para ligar/desligar todas as luzes
     function toggleLightsOn() {
       lightOn = !lightOn;
@@ -83,6 +74,7 @@
           light.classList.add(light.dataset.color);
         } else {
           light.classList.add("off");
+          clearIntervals();
         }
       });
     }
@@ -92,27 +84,39 @@
       intervals = [];
     }
 
-    function toggleBlink() {
+    function blinkPattern() {
+      clearIntervals();
       //no entervalo de tempo apaga-se a luz
       const interval = setInterval(() => {
         lights.forEach((light) => {
           light.classList.toggle("off");
         });
       }, 500);
-      interval.push(interval);
+      intervals.push(interval);
     }
 
     // Padrão: Cascata
     function cascadePattern() {
       clearIntervals();
-      lights.forEach((light, index) => {
-        const interval = setInterval(() => {
-          light.classList.toggle("off");
-        }, 1000);
 
+      // Agrupa luzes por nível
+      const levels = {};
+      lights.forEach((light) => {
+        const level = light.dataset.level;
+        if (!levels[level]) levels[level] = [];
+        levels[level].push(light);
+      });
+
+      // Pisca cada nível com delay
+      Object.keys(levels).forEach((level, index) => {
         setTimeout(() => {
+          const interval = setInterval(() => {
+            levels[level].forEach((light) => {
+              light.classList.toggle("off");
+            });
+          }, 1000);
           intervals.push(interval);
-        }, index * 150);
+        }, index * 300);
       });
     }
     // Padrão: Aleatório
@@ -124,6 +128,29 @@
         }, Math.random() * 800 + 400);
         intervals.push(interval);
       });
+    }
+    // Mudar padrão
+    function changePattern(pattern) {
+      if (!lightOn) {
+        clearActiveButtons();
+        return;
+      }
+      lightsOn = true;
+
+      lights.forEach((light) => light.classList.remove("off"));
+      if (lightsOn) {
+        if (pattern === "blink") {
+          document.getElementById("btnBlink").classList.add("active");
+          blinkPattern();
+        } else if (pattern === "cascade") {
+          document.getElementById("btnBlink").classList.add("active");
+          cascadePattern();
+        } else if (pattern === "random") {
+          randomPattern();
+        }
+      } else {
+        clearIntervals();
+      }
     }
     // Criar flocos de neve
     function createSnowflake() {
@@ -149,8 +176,5 @@
         snowInterval = setInterval(createSnowflake, 200);
       }
     }
-
-    // Iniciar com padrão aleatório
-    randomPattern();
   </script>
 </html>

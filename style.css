@@ -130,6 +130,7 @@ button:hover {
 button:active {
   transform: translateY(0);
 }
+
 .snowflake {
   position: fixed;
   top: -10px;
