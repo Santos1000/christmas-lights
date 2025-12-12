@@ -52,11 +52,19 @@
       </div>
     </div>
     <div class="controls">
-      <button onclick="toggleLightsOn()">Ligar/Desligar Luzes</button>
-      <button onclick="changePattern('blink')">Pisca-Pisca</button>
-      <button onclick="changePattern('cascade')">Cascata</button>
-      <button onclick="changePattern('random')">Aleatório</button>
-      <button onclick="toggleSnow()">Neve ❄</button>
+      <button onclick="toggleLightsOn()" id="btnToggle">
+        Ligar/Desligar Luzes
+      </button>
+      <button onclick="changePattern('blink')" id="btnBlink" class="frozen">
+        Pisca-Pisca
+      </button>
+      <button onclick="changePattern('cascade')" id="btnCascade" class="frozen">
+        Cascata
+      </button>
+      <button onclick="changePattern('random')" id="btnRandom" class="frozen">
+        Aleatório
+      </button>
+      <button onclick="toggleSnow()" id="btnSnow" class="frozen">Neve ❄</button>
     </div>
   </body>
   <script>
@@ -77,7 +85,30 @@
           clearIntervals();
         }
       });
+      const frozenButtons = ["btnBlink", "btnCascade", "btnRandom", "btnSnow"];
+      frozenButtons.forEach((btnId) => {
+        const btn = document.getElementById(btnId);
+        if (lightOn) {
+          // Efeito de quebrar o gelo
+          btn.classList.add("ice-crack");
+          setTimeout(() => {
+            btn.classList.remove("frozen", "ice-crack");
+          }, 500);
+        } else {
+          btn.classList.add("frozen");
+        }
+      });
+      // Se ligou, reinicia o padrão atual
+      if (lightOn) {
+        setTimeout(() => {
+          if (currentPattern === "blink") blinkPattern();
+          else if (currentPattern === "cascade") cascadePattern();
+          else if (currentPattern === "random") randomPattern();
+        }, 600);
+      }
     }
+
+    // Descongelar ou congelar botões
     // Limpar intervalos anteriores necessário para todos os tipos de pisca
     function clearIntervals() {
       intervals.forEach((interval) => clearInterval(interval));
