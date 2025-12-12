@@ -61,15 +61,14 @@
       <button onclick="toggleLightsOn()">Ligar/Desligar Luzes</button>
     </div>
   </body>
-  <script src="script.js">
-
-    const light = document.querySelectorAll(".light");
+  <script>
+    const lights = document.querySelectorAll(".light");
     let interval = [];
     let lightOn = false;
     // Função para ligar/desligar todas as luzes
     function toggleLightsOn() {
       lightOn = !lightOn;
-      light.forEach((light) => {
+      lights.forEach((light) => {
         if (lightOn) {
           light.classList.remove("off");
           light.classList.add(light.dataset.color);
@@ -77,6 +76,21 @@
           light.classList.add("off");
         }
       });
+    }
+    // Limpar intervalos anteriores necessário para todos os tipos de pisca
+    function clearIntervals() {
+      intervals.forEach((interval) => clearInterval(interval));
+      intervals = [];
+    }
+
+    function toggleBlink() {
+      //no entervalo de tempo apaga-se a luz
+      const interval = setInterval(() => {
+        lights.forEach((light) => {
+          light.classList.toggle("off");
+        });
+      }, 500);
+      interval.push(interval);
     }
   </script>
 </html>
