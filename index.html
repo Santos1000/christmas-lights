@@ -13,44 +13,49 @@
         <div class="star">★</div>
         <div class="tree-line">▲</div>
         <div class="tree-line">
-          <span class="light" data-color="red">●</span>▲<span
+          <span class="light" data-color="red" data-level="1"></span>●</span>▲<span
             class="light"
-            data-color="blue"
+            data-color="blue" data-level="1"
             >●</span
           >
         </div>
         <div class="tree-line">
-          <span class="light" data-color="yellow">●</span>▲▲<span
+          <span class="light" data-color="yellow" data-level="2">●</span>▲▲<span
             class="light"
             data-color="green"
+            data-level="2"
             >●</span
           >
         </div>
         <div class="tree-line">
-          <span class="light" data-color="purple">●</span>▲▲▲<span
+          <span class="light" data-color="purple" data-level="3">●</span>▲▲▲<span
             class="light"
             data-color="white"
+            data-level="3"
             >●</span
           >
         </div>
         <div class="tree-line">
-          <span class="light" data-color="blue">●</span>▲▲▲▲<span
+          <span class="light" data-color="blue" data-level="4">●</span>▲▲▲▲<span
             class="light"
             data-color="red"
+            data-level="4"
             >●</span
           >
         </div>
         <div class="tree-line">
-          <span class="light" data-color="green">●</span>▲▲▲▲▲<span
+          <span class="light" data-color="green" data-level="5">●</span>▲▲▲▲▲<span
             class="light"
             data-color="yellow"
+            data-level="5"
             >●</span
           >
         </div>
         <div class="tree-line">
-          <span class="light" data-color="white">●</span>▲▲▲▲▲▲<span
+          <span class="light" data-color="white" data-level="5">●</span>▲▲▲▲▲▲<span
             class="light"
             data-color="purple"
+            data-level="6"
             >●</span
           >
         </div>
@@ -59,6 +64,10 @@
     </div>
     <div class="controls">
       <button onclick="toggleLightsOn()">Ligar/Desligar Luzes</button>
+      <button onclick="changePattern('blink')">Pisca-Pisca</button>
+      <button onclick="changePattern('cascade')">Cascata</button>
+      <button onclick="changePattern('random')">Aleatório</button>
+      <button onclick="toggleSnow()">Neve ❄</button>
     </div>
   </body>
   <script>
@@ -112,9 +121,36 @@
       lights.forEach((light) => {
         const interval = setInterval(() => {
           light.classList.toggle("off");
-        }, Math.random() * 860 + 400);
+        }, Math.random() * 800 + 400);
         intervals.push(interval);
       });
     }
+    // Criar flocos de neve
+    function createSnowflake() {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄";
+      snowflake.style.left = Math.random() * 100 + "vw";
+      snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+      snowflake.style.fontSize = Math.random() * 10 + 15 + "px";
+      document.body.appendChild(snowflake);
+
+      setTimeout(() => {
+        snowflake.remove();
+      }, 5000);
+    }
+
+    // Toggle neve
+    function toggleSnow() {
+      if (snowInterval) {
+        clearInterval(snowInterval);
+        snowInterval = null;
+      } else {
+        snowInterval = setInterval(createSnowflake, 200);
+      }
+    }
+
+    // Iniciar com padrão aleatório
+    randomPattern();
   </script>
 </html>

@@ -130,3 +130,34 @@ button:hover {
 button:active {
   transform: translateY(0);
 }
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: white;
+  font-size: 20px;
+  opacity: 0.8;
+  pointer-events: none;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+.message {
+  margin-top: 30px;
+  color: #fff;
+  font-size: 18px;
+  font-style: italic;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+  animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
