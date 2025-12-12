@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -58,8 +57,26 @@
         <div class="trunk">|||</div>
       </div>
     </div>
+    <div class="controls">
+      <button onclick="toggleLightsOn()">Ligar/Desligar Luzes</button>
+    </div>
   </body>
+  <script src="script.js">
+
+    const light = document.querySelectorAll(".light");
+    let interval = [];
+    let lightOn = false;
+    // Função para ligar/desligar todas as luzes
+    function toggleLightsOn() {
+      lightOn = !lightOn;
+      light.forEach((light) => {
+        if (lightOn) {
+          light.classList.remove("off");
+          light.classList.add(light.dataset.color);
+        } else {
+          light.classList.add("off");
+        }
+      });
+    }
+  </script>
 </html>
-=======
-<h1>Hello World</h1>
->>>>>>> 1fb2192fccbd9d2b733f35abb4a9a450e1ef9d2b
