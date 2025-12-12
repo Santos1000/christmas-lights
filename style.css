@@ -130,3 +130,148 @@ button:hover {
 button:active {
   transform: translateY(0);
 }
+
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: white;
+  font-size: 20px;
+  opacity: 0.8;
+  pointer-events: none;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+.message {
+  margin-top: 30px;
+  color: #fff;
+  font-size: 18px;
+  font-style: italic;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+  animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+button.frozen {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+button.frozen::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(
+    135deg,
+    rgba(173, 216, 230, 0.8) 0%,
+    rgba(135, 206, 250, 0.9) 50%,
+    rgba(173, 216, 230, 0.8) 100%
+  );
+  border-radius: 30px;
+  z-index: 1;
+  box-shadow: 0 0 20px rgba(135, 206, 250, 0.8),
+    inset 0 0 20px rgba(255, 255, 255, 0.5);
+  animation: iceShine 2s infinite;
+}
+
+button.frozen::after {
+  content: "❄️";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  z-index: 2;
+  animation: snowflakeSpin 3s linear infinite;
+}
+
+@keyframes iceShine {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(135, 206, 250, 0.8),
+      inset 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(173, 216, 230, 1),
+      inset 0 0 30px rgba(255, 255, 255, 0.8);
+  }
+}
+
+@keyframes snowflakeSpin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.ice-crack {
+  animation: crackEffect 0.5s ease-out;
+}
+
+@keyframes crackEffect {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1) rotate(2deg);
+  }
+  50% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  75% {
+    transform: scale(1.05) rotate(1deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Efeito de reflexo usando animation CSS */
+.glass-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  z-index: 1;
+}
+
+/* VERSÃO 3: Reflexo que vai e volta */
+.ping-pong-reflex::before {
+  animation: reflex-ping-pong 3s infinite alternate ease-in-out;
+}
+
+@keyframes reflex-ping-pong {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
