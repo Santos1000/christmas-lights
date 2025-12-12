@@ -92,5 +92,29 @@
       }, 500);
       interval.push(interval);
     }
+
+    // Padrão: Cascata
+    function cascadePattern() {
+      clearIntervals();
+      lights.forEach((light, index) => {
+        const interval = setInterval(() => {
+          light.classList.toggle("off");
+        }, 1000);
+
+        setTimeout(() => {
+          intervals.push(interval);
+        }, index * 150);
+      });
+    }
+    // Padrão: Aleatório
+    function randomPattern() {
+      clearIntervals();
+      lights.forEach((light) => {
+        const interval = setInterval(() => {
+          light.classList.toggle("off");
+        }, Math.random() * 860 + 400);
+        intervals.push(interval);
+      });
+    }
   </script>
 </html>
