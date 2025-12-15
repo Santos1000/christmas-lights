@@ -1,7 +1,7 @@
 # Nome do Projeto
 
 ## 🚀 Demo
-[🔗 Link do CodePen/GitHub Pages]((https://santos1000.github.io/christmas-lights/))
+[🔗 Link do CodePen/GitHub Pages](https://santos1000.github.io/christmas-lights/)
 
 ## 📸 Preview
 <img width="1513" height="729" alt="descktop" src="https://github.com/user-attachments/assets/92122ccf-fbee-450d-ad78-0981f48e5e17" />
@@ -11,7 +11,13 @@
 
 ## 🎥 Demonstração Interativa
 
-
+<p align="center">
+  <img src="(https://github.com/user-attachments/assets/2e28b0c7-e57c-42bf-9d48-5891c18fb70d)" 
+       width="600" 
+       alt="Luzes de Natal piscando interativamente">
+  <br>
+  <em>As luzes acendem em sequência com efeitos especiais</em>
+</p>
 
 
 
