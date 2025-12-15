@@ -8,9 +8,9 @@
   </head>
   <body>
     <div class="container">
-      <h1>🎄 Árvore de Natal Interativa 🎄</h1>
+      <h1>🎄 Interactive Christmas Tree 🎄</h1>
       <div class="tree">
-        <div class="star">★</div>
+        <div class="star">⭐</div>
         <div class="tree-line" data-level="0">▲</div>
         <div class="tree-line">
           <span class="light" data-color="blue" data-level="1">●</span>▲<span
@@ -51,20 +51,29 @@
         <div class="trunk">|||</div>
       </div>
     </div>
-    <div class="controls">
+
+    <div class="controls" aria-label="Controles das luzes de Natal">
       <button onclick="toggleLightsOn()" id="btnToggle">
-        Ligar/Desligar Luzes
+        Turn Lights On/Off
       </button>
       <button onclick="changePattern('blink')" id="btnBlink" class="frozen">
-        Pisca-Pisca
+        Blinking Lights
       </button>
       <button onclick="changePattern('cascade')" id="btnCascade" class="frozen">
-        Cascata
+        Cascade Effect
       </button>
       <button onclick="changePattern('random')" id="btnRandom" class="frozen">
-        Aleatório
+        Random Pattern
       </button>
       <button onclick="toggleSnow()" id="btnSnow" class="frozen">Neve ❄</button>
+    </div>
+    <div class="message">
+      Merry Christmas and Happy New Year ! Developed by
+      <a
+        href="https://linkedin.com/in/santBarbara"
+        target="Meu link para o Linkedin"
+        >Barbara Santos</a
+      >
     </div>
   </body>
   <script>
@@ -81,6 +90,7 @@
           light.classList.remove("off");
           light.classList.add(light.dataset.color);
         } else {
+          toggleSnow(true); // Forçar a desligar a neve
           light.classList.add("off");
           clearIntervals();
         }
@@ -199,12 +209,22 @@
     }
 
     // Toggle neve
-    function toggleSnow() {
-      if (snowInterval) {
+    function toggleSnow(forceOff = false) {
+      if (forceOff && snowInterval) {
+        // Se forceOff é true, sempre desliga
         clearInterval(snowInterval);
         snowInterval = null;
-      } else {
-        snowInterval = setInterval(createSnowflake, 200);
+        document.getElementById("btnSnow").classList.remove("active");
+      } else if (!forceOff) {
+        // Comportamento normal de toggle
+        if (snowInterval) {
+          clearInterval(snowInterval);
+          snowInterval = null;
+          document.getElementById("btnSnow").classList.remove("active");
+        } else {
+          snowInterval = setInterval(createSnowflake, 200);
+          document.getElementById("btnSnow").classList.add("active");
+        }
       }
     }
   </script>
