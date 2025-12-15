@@ -10,7 +10,7 @@
     <div class="container">
       <h1>🎄 Interactive Christmas Tree 🎄</h1>
       <div class="tree">
-        <div class="star">★</div>
+        <button class="star" onclick="toggleSpin(this)">★</button>
         <div class="tree-line" data-level="0">▲</div>
         <div class="tree-line">
           <span class="light" data-color="blue" data-level="1">●</span>▲<span
@@ -226,6 +226,9 @@
           document.getElementById("btnSnow").classList.add("active");
         }
       }
+    }
+    function toggleSpin(element) {
+      element.classList.toggle("spinning");
     }
   </script>
 </html>
